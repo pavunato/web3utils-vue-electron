@@ -1,15 +1,39 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="flex">
+    <div class="h-screen top-0 sticky p-4">
+      <!-- Note: add overflow-y-scroll if sidebar content is longer than page -->
+      <div v-for="fun in functions" :key="fun.name">
+          <router-link :to="{ path: `${fun.path}` }">{{ fun.name }}</router-link>
+        </div>
+    </div>
+
+    <div class="flex-grow p-4 bg-gray-300">
+      <router-view></router-view>
+    </div>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+// import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    // HelloWorld
+  },
+  data() {
+    return {
+      functions: [
+        {
+          name: 'Convert',
+          path: '/convert'
+        },
+        {
+          name: 'Hello',
+          path: '/hello'
+        }
+      ],
+    }
   }
 }
 </script>
@@ -20,7 +44,5 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
